@@ -19,7 +19,7 @@ app.get('/say/:greeting', (req, res) => {
 
 // route baru 1: static route
 app.get('/about', (req, res) => {
-  res.send(res.locals.msg + 'About Me');
+  res.send(res.locals.msg + ' About Me');
 });
 
 // route baru 2: dynamic route
