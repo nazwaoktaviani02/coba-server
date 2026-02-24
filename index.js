@@ -29,7 +29,7 @@ app.get('/hello/:name', (req, res) => {
 });
 
 app.get("/secret", (req, res) => {
-  res.status(401).send("jam 4 pulang kan ya, Pak?");
+  res.status(401).send("Gagal nih");
 });
 
 app.listen(3000);
