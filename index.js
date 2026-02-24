@@ -3,11 +3,6 @@ import express from 'express';
 const app = express();
 
 // global middleware
-app.use((req, res, next) => {
-  res.locals.msg = `Kau ke sini dulu ${req.path}`;
-  next();
-});
-
 app.get('/', (req, res) => {
   res.send(res.locals.msg + ' Halooo');
 });
