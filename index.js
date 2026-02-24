@@ -4,7 +4,7 @@ const app = express();
 
 // global middleware
 app.use((req, res, next) => {
-  res.locals.msg = `Ini adalah halaman:  ${req.path}`;
+  res.locals.msg = `Ini adalah halaman:`;
   next();
 });
 
@@ -19,7 +19,7 @@ app.get('/say/:greeting', (req, res) => {
 
 // route baru 1: static route
 app.get('/about', (req, res) => {
-  res.send(res.locals.msg + ' Ini halaman about');
+  res.send(res.locals.msg + 'About Me');
 });
 
 // route baru 2: dynamic route
