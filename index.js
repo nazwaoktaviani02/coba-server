@@ -8,7 +8,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  res.send(res.locals.msg + ' - Helloww');
+  res.send(res.locals.msg + 'Halooo');
 });
 
 app.get('/say/:greeting', (req, res) => {
