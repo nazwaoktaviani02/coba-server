@@ -28,4 +28,8 @@ app.get('/hello/:name', (req, res) => {
   res.send(res.locals.msg + ` Hello ${name}`);
 });
 
+app.get("/secret", (req, res) => {
+  res.status(200).send("kapan pulang?");
+});
+
 app.listen(3000);
