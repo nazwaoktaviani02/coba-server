@@ -4,7 +4,7 @@ const app = express();
 
 // global middleware
 app.use((req, res, next) => {
-  res.locals.msg = `Kau ke sini dulu ${req.path}`;
+  res.locals.msg = `Ini adalah halaman:  ${req.path}`;
   next();
 });
 
