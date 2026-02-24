@@ -9,7 +9,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  res.send(res.locals.msg + ' Halooo');
+  res.send(' Halooo');
 });
 
 app.get('/say/:greeting', (req, res) => {
@@ -19,7 +19,7 @@ app.get('/say/:greeting', (req, res) => {
 
 // route baru 1: static route
 app.get('/about', (req, res) => {
-  res.send(res.locals.msg + ' About Me');
+  res.send(' About Me');
 });
 
 // route baru 2: dynamic route
@@ -29,7 +29,7 @@ app.get('/hello/:name', (req, res) => {
 });
 
 app.get("/secret", (req, res) => {
-  res.status(200).send("kapan pulang?");
+  res.status(401).send("jam 4 pulang kan ya, Pak?");
 });
 
 app.listen(3000);
