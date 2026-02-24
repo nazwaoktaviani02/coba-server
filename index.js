@@ -3,19 +3,17 @@ import express from 'express';
 const app = express();
 
 app.use((req, res, next) => {
-  if (false) {
-    next(new Error('Not Authorized'));
-    return;
-  }
+  res.locals.msg = `Kau ke sini dulu ${req.path}`;
   next();
 });
 
-app.use((err, req, res, next) => {
-  res.send('Error Occurred');
+app.get('/', (req, res) => {
+  res.send(res.locals.msg + ' - Helloww');
 });
 
-app.get('/', (req, res) => {
-  res.send(' - Helloww');
+app.get('/say/:greeting', (req, res) => {
+  const { greeting } = req.params;
+  res.send(greeting);
 });
 
 app.listen(3000);
