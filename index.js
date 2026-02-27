@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from "mongoose";
 import noteRouter from './routes/notes.js';
+// import cors from "cors";
 
 // mongoose.connect(
 //   "mongodb://user01:admin123@ac-yn1f84i-shard-00-00.desnfid.mongodb.net:27017,ac-yn1f84i-shard-00-01.desnfid.mongodb.net:27017,ac-yn1f84i-shard-00-02.desnfid.mongodb.net:27017/Cluster0?ssl=true&replicaSet=atlas-yn1f84i-shard-0&authSource=admin&retryWrites=true&w=majority"
