@@ -12,6 +12,7 @@ import noteRouter from './routes/notes.js';
 // .then(()=>console.log('Connect DB'));
 
 
+
 mongoose.connect(
   "mongodb+srv://user01:admin123@cluster0.desnfid.mongodb.net/Cluster0?retryWrites=true&w=majority"
 )
