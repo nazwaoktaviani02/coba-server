@@ -9,7 +9,7 @@ router.post('/register', async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-    // 1. Cek apakah user sudah ada (opsional tapi disarankan)
+    // 1. Cek apakah user sudah ada
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
     if (existingUser) {
       return res.status(400).json({ error: "Username atau Email sudah terdaftar" });
@@ -23,7 +23,7 @@ router.post('/register', async (req, res) => {
     const user = new User({ 
       username, 
       email, 
-      password: hashedPassword // Simpan versi aman
+      password: hashedPassword 
     });
 
     await user.save();
@@ -33,7 +33,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// Login Logic
+// Login Logic (TANPA JWT)
 router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -46,12 +46,14 @@ router.post('/login', async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ error: "Invalid Credentials" });
 
-    // Jika sukses (biasanya di sini Anda akan mengembalikan token JWT)
+    // Response sukses tanpa token
     res.status(200).json({ 
       message: "Login Successful",
       user: { id: user._id, username: user.username } 
     });
   } catch (err) {
+    // Log error ke console server agar Anda bisa melihat jika ada masalah lain
+    console.error("Login Error:", err);
     res.status(500).json({ error: "Server Error" });
   }
 });
