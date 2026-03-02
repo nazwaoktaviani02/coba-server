@@ -1,19 +1,8 @@
 import express from 'express';
 import mongoose from "mongoose";
-import noteRouter from './routes/notes.js';
 import cors from "cors";
-
-
-
-// mongoose.connect(
-//   "mongodb://user01:admin123@ac-yn1f84i-shard-00-00.desnfid.mongodb.net:27017,ac-yn1f84i-shard-00-01.desnfid.mongodb.net:27017,ac-yn1f84i-shard-00-02.desnfid.mongodb.net:27017/Cluster0?ssl=true&replicaSet=atlas-yn1f84i-shard-0&authSource=admin&retryWrites=true&w=majority"
-// )
-// .then(()=>console.log('Connect DB'));
-
-// mongoose.connect('mongodb+srv://user01:admin123@cluster0.desnfid.mongodb.net/?appName=Cluster0')
-// .then(()=>console.log('Connect DB'));
-
-
+import authRoutes from './routes/auth.js';
+import notesRoutes from './routes/notes.js';
 
 mongoose.connect(
   "mongodb+srv://user01:admin123@cluster0.desnfid.mongodb.net/Cluster0?retryWrites=true&w=majority"
@@ -23,53 +12,34 @@ mongoose.connect(
 
 const app = express();
 
-app.use(cors({
-  origin: "*"
-}));
+// --- MIDDLEWARE (Order Matters!) ---
+app.use(cors({ origin: "*" }));
+app.use(express.json()); // Moved up! Must be before routes to read req.body
 
 app.use((req, res, next) => {
   res.locals.msg = `Ini adalah halaman:`;
   next();
 });
 
-app.get('/', (req, res) => {
-  res.send(' Halooo');
-});
+// --- BASIC ROUTES ---
+app.get('/', (req, res) => res.send(' Halooo'));
+app.get('/about', (req, res) => res.send(' About Me'));
 
-app.get('/say/:greeting', (req, res) => {
-  const { greeting } = req.params;
-  res.send(greeting);
-});
+// --- API ROUTES (Registered BEFORE listen) ---
+app.use('/api/auth', authRoutes);
+app.use('/notes', notesRoutes);
 
-
-app.get('/about', (req, res) => {
-  res.send(' About Me');
-});
-
-
-app.get('/hello/:name', (req, res) => {
-  const { name } = req.params;
-  res.send(res.locals.msg + ` Hello ${name}`);
-});
-
-app.get("/secret", (req, res) => {
-  res.status(401).send("Gagal nih");
-});
-
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
-});
-
-app.use(express.json());
-
+// --- ERROR HANDLING ---
 app.use((err, req, res, next) => {
-  res.status(500);
-  res.json({
+  res.status(500).json({
     result: 'fail',
     error: err.message,
   });
 });
 
-app.use('/notes', noteRouter);
+// --- START SERVER (Always at the very bottom) ---
+app.listen(5000, () => {
+  console.log("Server running on port 5000");
+});
 
 export default app;
