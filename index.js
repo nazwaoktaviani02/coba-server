@@ -72,3 +72,4 @@ app.use((err, req, res, next) => {
 
 app.use('/notes', noteRouter);
 
+export default app;
