@@ -1,6 +1,7 @@
 let notes = [
   {
     id: 1,
+    author: "nazwa",
     title: "first note",
     content: "My first note is here."
   }
@@ -10,6 +11,7 @@ const Note = {
   list() {
     return notes.map(({ id, title }) => ({
       id,
+      author,
       title,
       content
     }));
@@ -23,10 +25,11 @@ const Note = {
     return note;
   },
 
-  create(title, content) {
+  create(author, title, content) {
     const { id: lastId } = notes[notes.length - 1];
     const newNote = {
       id: lastId + 1,
+      author,
       title,
       content
     };
@@ -34,12 +37,13 @@ const Note = {
     return newNote;
   },
 
-  update(id, title, content) {
+  update(id, title, content, author) {
     const index = notes.findIndex(note => note.id === id);
     if (index < 0) {
       throw new Error("Note not found for update");
     }
 
+    notes[index].author = author;
     notes[index].title = title;
     notes[index].content = content;
 

@@ -56,7 +56,9 @@ app.get("/secret", (req, res) => {
   res.status(401).send("Gagal nih");
 });
 
-app.listen(3000);
+app.listen(5000, () => {
+  console.log("Server running on port 5000");
+});
 
 app.use(express.json());
 

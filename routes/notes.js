@@ -30,7 +30,7 @@ router.get("/:id", async (req, res, next) => {
 
 // POST insert
 router.post('/', async(req, res, next) => {
-    const { title, content } = req.body;
+    const { title, content, author } = req.body;
     
     if (!title || !content){
         return res.status(400).json({
@@ -42,6 +42,7 @@ router.post('/', async(req, res, next) => {
         const note = await Post.create({
             title,
             content,
+            author,
         });
         res.status(201).json(note);
     
