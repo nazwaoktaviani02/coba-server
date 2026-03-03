@@ -19,7 +19,7 @@ app.use(cookieParser());
 
 // --- STEP 2: CORS ---
 app.use(cors({ 
-  origin: true, 
+  origin: "nazwabuilds.my.id", 
   credentials: true 
 }));
 
